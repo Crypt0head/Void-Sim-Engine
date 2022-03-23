@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "ratio": "cpp",
+        "chrono": "cpp",
+        "semaphore": "cpp",
+        "thread": "cpp"
+    }
+}
