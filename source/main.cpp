@@ -15,9 +15,11 @@
 
 int main(int argc, char* argv[])
 {
-    auto cur_time = std::chrono::high_resolution_clock::now();
+    auto cur_time = std::chrono::system_clock::now();
     time_t time = std::chrono::system_clock::to_time_t(cur_time);
     std::cout<<std::ctime(&time)<<std::endl;
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 
     return 0;
 }

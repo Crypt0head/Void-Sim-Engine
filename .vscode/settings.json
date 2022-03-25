@@ -3,6 +3,7 @@
         "ratio": "cpp",
         "chrono": "cpp",
         "semaphore": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "iostream": "cpp"
     }
 }

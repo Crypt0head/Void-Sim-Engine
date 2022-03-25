@@ -29,6 +29,19 @@
             ],
             "preLaunchTask": "C/C++: g++ сборка активного файла",
             "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "clang - Build and debug active file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/${fileBasenameNoExtension}.out",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "C/C++: clang build active file"
         }
     ]
 }
