@@ -1,0 +1,1 @@
+// TODO: Base class for all snake, inherited from VAnimal
