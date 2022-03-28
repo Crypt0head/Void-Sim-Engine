@@ -8,7 +8,7 @@
             "name": "g++ - Сборка и отладка активного файла",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/${fileBasenameNoExtension}.out",
+            "program": "${workspaceFolder}/bin/main.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

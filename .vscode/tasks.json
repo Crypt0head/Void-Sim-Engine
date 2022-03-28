@@ -8,9 +8,9 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "-v",
-                "${file}",
+                "${workspaceFolder}/source/*",
                 "-o",
-                "${workspaceFolder}/bin/${fileBasenameNoExtension}.out",
+                "${workspaceFolder}/bin/main.out",
                 "-lboost_program_options",
                 "-lpthread"
             ],
