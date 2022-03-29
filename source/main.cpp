@@ -51,14 +51,19 @@ int main(int argc, char* argv[])
 {
     VWorld World;
     bool* bSimulate = new bool(true);
+    bool bThreadTaskCompleted = false;
     char Command = 0;
 
     // Run World simulation in a separate thread
-    std::thread WorldThread([&World, &bSimulate](){World.Start(bSimulate);});
+    std::thread WorldThread([&World, &bSimulate, &bThreadTaskCompleted](){World.Start(bSimulate, bThreadTaskCompleted);});
 
     while(*bSimulate)
     {
-        Print(World);
+        if(bThreadTaskCompleted)
+        {
+            Print(World);
+            bThreadTaskCompleted = false;
+        }
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
 

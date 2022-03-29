@@ -2,8 +2,8 @@
 
 VWorld::VWorld()
 {
-    Field.first=60;
-    Field.second=60;
+    Field.first=20;
+    Field.second=20;
     EntMgr.reserve(6);
     GenCounter = 1;
 }
@@ -13,7 +13,7 @@ VWorld::VWorld(std::string cfg_File)
     // TODO: Implement configs loading from given file with checks
 }
 
-void VWorld::Start(bool* bSimCondition)
+void VWorld::Start(bool* bSimCondition, bool &bThreadTaskCompleted)
 {
     Init();
     
@@ -24,6 +24,7 @@ void VWorld::Start(bool* bSimCondition)
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
         Update();
         //Tick();
+        bThreadTaskCompleted = true;
     }
 
     Stop();
@@ -51,7 +52,7 @@ void VWorld::Init()
 {
     std::srand(std::time(nullptr));
 
-    int Turns = rand() % 1500;
+    int Turns = rand() % 30;
 
     // EntMgr.push_back(VEntity(1,2, '1')); EntMgr.push_back(VEntity(2,2,'2')); EntMgr.push_back(VEntity(3,2,'3'));
     //                                                                 EntMgr.push_back(VEntity(3,1,'4'));
@@ -86,7 +87,7 @@ void VWorld::Update()
     if(!EntMgr.empty())
     {
         // Born new Generation
-        char Gen = 97 + rand() % 25;
+        char Gen = 97 + rand() % 30;
         std::vector<VEntity>::iterator EntityIterator = EntMgr.begin();
 
         for(std::vector<VEntity>::iterator it = EntMgr.begin();it != EntMgr.end();it++)

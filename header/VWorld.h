@@ -29,7 +29,7 @@ protected:
 public:
     VWorld();
     VWorld(std::string cfg_File);
-    void Start(bool* bSimCondition);
+    void Start(bool* bSimCondition, bool &bThreadTaskCompleted);
     void Tick();
     void Stop();
     void Init();
