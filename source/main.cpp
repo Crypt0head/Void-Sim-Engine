@@ -10,7 +10,7 @@
 #include <ctime>
 #include <sstream>
 #include <iomanip>
-// #include <boost/json>
+#include <boost/json.hpp>
 #include <boost/program_options.hpp>
 // #include <boost/...>
 
@@ -20,7 +20,6 @@
 // TODO: Implament simple SDL rendering engine
 void Print(VWorld &World)
 {
-    //std::cout << "\n\n\n" << std::setfill('*') << std::setw(61) << "\n\n\n";
     system("clear");
 
     std::vector<std::string> ScrOutput;
@@ -64,7 +63,6 @@ int main(int argc, char* argv[])
             Print(World);
             bThreadTaskCompleted = false;
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
 
     // Wait untile sim over

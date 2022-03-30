@@ -35,6 +35,9 @@ public:
     void Init();
     void Update();
     int Search(int, int);
+    int Search_d(int, int);
+    int CountNighbors(int,int, bool = false);
+    std::pair<int, std::pair<int, int>> CountNighbors(std::pair<int, std::pair<int, int>>);
     const std::pair<int,int> GetField();
     std::vector<VEntity>& GetEntMgr();
     virtual ~VWorld();

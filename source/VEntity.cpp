@@ -17,10 +17,9 @@ VEntity::VEntity(int x, int y, char g, bool a)
 
 void VEntity::Tick()
 {
-    if(NeighborsCount < 2 || NeighborsCount > 3)
+    if((NeighborsCount < 2 || NeighborsCount > 3) && !this->bDead)
     {
         bDead = true;
-        bActive = false;
     }   
 }
 
