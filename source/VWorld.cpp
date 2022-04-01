@@ -1,9 +1,10 @@
 #include "../header/VWorld.h"
 
-VWorld::VWorld()
+VWorld::VWorld(unsigned int field_resolution_n, unsigned int field_resolution_m, unsigned int seed)
 {
-    Field.first=60;
-    Field.second=60;
+    Field.first=field_resolution_n;
+    Field.second=field_resolution_m;
+    Seed=seed;
     GenCounter = 1;
 }
 
@@ -41,7 +42,7 @@ void VWorld::Init()
 {
     std::srand(std::time(nullptr));
 
-    int Turns = rand() % 1500;
+    int Turns = rand() % Seed;
     // GLIDER
     // EntMgr.push_back(VEntity(1,2, '1')); EntMgr.push_back(VEntity(2,2,'2')); EntMgr.push_back(VEntity(3,2,'3'));
     //                                                                 EntMgr.push_back(VEntity(3,1,'4'));
@@ -85,11 +86,13 @@ void VWorld::Update()
             {it->bActive = true;}
         }
 
-        for(auto it = EntMgr.begin();it!=EntMgr.end();++it)
-        {
-            VEntity &Entity = *it;
-            int size = EntMgr.size(); // remove after fix
+        int count = 0;
 
+        for(auto it_1 = EntMgr.begin();it_1!=EntMgr.end();++it_1)
+        {
+            VEntity &Entity = *it_1;
+            int size = EntMgr.size(); // remove after fix
+            count++;
             Entity.NeighborsCount = CountNighbors(Entity.GetPosition().first, Entity.GetPosition().second, true);
 
             Entity.Tick();

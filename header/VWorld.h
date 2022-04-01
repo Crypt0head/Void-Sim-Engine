@@ -26,8 +26,10 @@ protected:
 
     unsigned long long GenCounter;
 
+    unsigned int Seed;
+
 public:
-    VWorld();
+    VWorld(unsigned int = 5,unsigned int = 5, unsigned int = 10);
     VWorld(std::string cfg_File);
     void Start(bool* bSimCondition, bool &bThreadTaskCompleted);
     void Tick();
