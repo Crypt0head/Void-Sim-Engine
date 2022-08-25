@@ -3,15 +3,15 @@
 //
 
 #include <iostream>
-#include <chrono>
+// #include <chrono>
 #include <vector>
 #include <thread>
 #include <mutex>
-#include <cstdlib>
-#include <ctime>
-#include <iomanip>
+// #include <cstdlib>
+// #include <ctime>
+// #include <iomanip>
 
-#include "VEntity.h"
+class VEntity;
 
 class VWorld
 {
