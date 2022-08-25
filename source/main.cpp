@@ -6,15 +6,16 @@
 
 #include <iostream>
 #include <thread>
-#include <chrono>
-#include <ctime>
-#include <sstream>
-#include <iomanip>
-#include <boost/json.hpp>
+// #include <chrono>
+// #include <ctime>
+// #include <sstream>
+// #include <iomanip>
+// #include <boost/json.hpp>
 #include <boost/program_options.hpp>
 // #include <boost/...>
 
 #include "../header/VWorld.h"
+#include "../header/VEntity.h"
 
 namespace opt = boost::program_options;
 
@@ -85,8 +86,6 @@ int main(int argc, char *argv[])
     {
         World = new VWorld(10,10,50);
     }
-
-    //VWorld World;
 
     bool* bSimulate = new bool(true);
     bool bThreadTaskCompleted = false;
