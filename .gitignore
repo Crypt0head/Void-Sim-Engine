@@ -33,3 +33,7 @@
 
 # Clang compi
 *.dSYM
+
+# VS Code
+
+.vscode/*.log

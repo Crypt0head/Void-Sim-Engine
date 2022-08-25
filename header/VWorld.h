@@ -3,15 +3,15 @@
 //
 
 #include <iostream>
-#include <chrono>
+// #include <chrono>
 #include <vector>
 #include <thread>
 #include <mutex>
-#include <cstdlib>
-#include <ctime>
-#include <iomanip>
+// #include <cstdlib>
+// #include <ctime>
+// #include <iomanip>
 
-#include "VEntity.h"
+class VEntity;
 
 class VWorld
 {
@@ -26,15 +26,20 @@ protected:
 
     unsigned long long GenCounter;
 
+    unsigned int Seed;
+
 public:
-    VWorld();
+    VWorld(unsigned int = 5,unsigned int = 5, unsigned int = 10);
     VWorld(std::string cfg_File);
-    void Start(bool* bSimCondition);
+    void Start(bool* bSimCondition, bool &bThreadTaskCompleted);
     void Tick();
     void Stop();
     void Init();
     void Update();
     int Search(int, int);
+    int Search_d(int, int);
+    int CountNighbors(int,int, bool = false);
+    std::pair<int, std::pair<int, int>> CountNighbors(std::pair<int, std::pair<int, int>>);
     const std::pair<int,int> GetField();
     std::vector<VEntity>& GetEntMgr();
     virtual ~VWorld();

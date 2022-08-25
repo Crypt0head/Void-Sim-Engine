@@ -6,21 +6,23 @@
 
 #include <iostream>
 #include <thread>
-#include <chrono>
-#include <ctime>
-#include <sstream>
-#include <iomanip>
-// #include <boost/json>
+// #include <chrono>
+// #include <ctime>
+// #include <sstream>
+// #include <iomanip>
+// #include <boost/json.hpp>
 #include <boost/program_options.hpp>
 // #include <boost/...>
 
 #include "../header/VWorld.h"
+#include "../header/VEntity.h"
+
+namespace opt = boost::program_options;
 
 // Simple CL output function
 // TODO: Implament simple SDL rendering engine
 void Print(VWorld &World)
 {
-    //std::cout << "\n\n\n" << std::setfill('*') << std::setw(61) << "\n\n\n";
     system("clear");
 
     std::vector<std::string> ScrOutput;
@@ -47,25 +49,69 @@ void Print(VWorld &World)
 }
 
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-    VWorld World;
+    VWorld* World = nullptr;
+
+    opt::options_description description("All options");
+
+    description.add_options()
+    ("field", opt::value<int>(), "Field settings NxN")
+    ("seed,s", opt::value<int>(), "Amount of Entity on start of simulation")
+    ("cfg-file,f", opt::value<std::string>(), "Path to config file")
+    ("help,h", "Help messsage");
+
+    opt::variables_map vm;
+
+    opt::store(opt::parse_command_line(argc, argv, description), vm);
+
+    opt::notify(vm);
+
+    if(vm.count("help"))
+    {
+        std::cout << description << "\n";
+        return 1;
+    }
+
+    if(vm.count("cfg-file"))
+    {
+        // TODO: Implement input from config file
+    }
+    else if(vm.count("field"))
+    {
+        World = new VWorld(vm["field"].as<int>(), vm["field"].as<int>(), (vm.count("seed")) ? vm["seed"].as<int>() : vm["field"].as<int>()/2);    
+        // TODO: Check if seed arg valid
+    }
+    else
+    {
+        World = new VWorld(10,10,50);
+    }
+
     bool* bSimulate = new bool(true);
+    bool bThreadTaskCompleted = false;
     char Command = 0;
 
     // Run World simulation in a separate thread
-    std::thread WorldThread([&World, &bSimulate](){World.Start(bSimulate);});
+    std::thread WorldThread([&World, &bSimulate, &bThreadTaskCompleted](){World->Start(bSimulate, bThreadTaskCompleted);});
 
     while(*bSimulate)
     {
-        Print(World);
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        if(bThreadTaskCompleted)
+        {
+            Print(*World);
+            bThreadTaskCompleted = false;
+        }
     }
 
     // Wait untile sim over
     WorldThread.join();
 
     delete bSimulate;
+    
+    if(World != nullptr)
+    {
+       delete World;
+    }
 
     return 0;
 }
