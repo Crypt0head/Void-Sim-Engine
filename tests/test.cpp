@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
+#include "../includes/VEntity.h"
 
 // TEST_CASE("Equalution test for USD and CHF")
 // {
@@ -33,3 +34,16 @@
 //         REQUIRE(b == false);
 //     }
 // }
+
+TEST_CASE("Equalution test for Entities")
+{
+    VEntity ent(0, 0, 'x', true);
+    bool b = false;
+
+    SECTION("ent == Ent(0, 0, 'x', true)"){
+        b = ent == VEntity(0, 0, 'x', true);
+        REQUIRE(b == true);
+    }
+
+
+}
