@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/usr/include/boost",
-                "${workspaceFolder}/header"
+                "${workspaceFolder}/includes",
+                "${workspaceFolder}/tests"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",
@@ -17,7 +18,10 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "/usr/include/boost",
+                "${workspaceFolder}/includes",
+                "${workspaceFolder}/tests"
             ],
             "defines": [],
             "macFrameworkPath": [
