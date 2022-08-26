@@ -1,5 +1,5 @@
-#include "../header/VWorld.h"
-#include "../header/VEntity.h"
+#include "../includes/VWorld.h"
+#include "../includes/VEntity.h"
 
 VWorld::VWorld(unsigned int field_resolution_n, unsigned int field_resolution_m, unsigned int seed)
 {
