@@ -14,8 +14,8 @@
 #include <boost/program_options.hpp>
 // #include <boost/...>
 
-#include "../header/VWorld.h"
-#include "../header/VEntity.h"
+#include "../includes/VWorld.h"
+#include "../includes/VEntity.h"
 
 namespace opt = boost::program_options;
 

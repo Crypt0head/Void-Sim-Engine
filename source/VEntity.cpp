@@ -1,4 +1,4 @@
-#include "../header/VEntity.h"
+#include "../includes/VEntity.h"
 
 VEntity::VEntity()
 {
@@ -26,6 +26,16 @@ void VEntity::Tick()
 const std::pair<const int, const int> VEntity::GetPosition()
 {
     return Position;
+}
+
+bool VEntity::operator==(const VEntity& ent)
+{
+    if((this->Position == ent.Position) && (this->Gen == ent.Gen) && (this->bActive == ent.bActive))
+    {
+        return true;
+    }
+
+    return false;
 }
 
 VEntity::~VEntity()

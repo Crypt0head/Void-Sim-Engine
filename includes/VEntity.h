@@ -23,6 +23,7 @@ public:
     virtual void Tick();
     virtual const std::pair<const int, const int> GetPosition();
     virtual const bool IsDead() {return bDead;}
+    virtual bool operator==(const VEntity&);
     virtual ~VEntity();
 
 };
