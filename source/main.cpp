@@ -16,6 +16,7 @@
 
 #include "../includes/VWorld.h"
 #include "../includes/VEntity.h"
+#include "../includes/SimMods/VSM_LifeGame.h"
 
 namespace opt = boost::program_options;
 
@@ -28,13 +29,13 @@ void Print(VWorld &World)
     std::vector<std::string> ScrOutput;
 
     bool bEntity = false;
-    for(int i = 0; i<World.GetField().first; ++i)
+    for(int i = 0; i<World.GetSimMod()->GetField().first; ++i)
     {
-        for(int j = 0; j<World.GetField().second; ++j)
+        for(int j = 0; j<World.GetSimMod()->GetField().second; ++j)
         {
             bEntity = false;
             char Gen = ' ';
-            for(VEntity& Entity : World.GetEntMgr())
+            for(VEntity& Entity : World.GetSimMod()->GetEntMgr())
             {
                 if(Entity.GetPosition().first == i && Entity.GetPosition().second == j)
                 {
@@ -79,12 +80,12 @@ int main(int argc, char *argv[])
     }
     else if(vm.count("field"))
     {
-        World = new VWorld(vm["field"].as<int>(), vm["field"].as<int>(), (vm.count("seed")) ? vm["seed"].as<int>() : vm["field"].as<int>()/2);    
+        World = new VWorld(new VSM_LifeGame(vm["field"].as<int>(), vm["field"].as<int>(),(vm.count("seed")) ? vm["seed"].as<int>() : vm["field"].as<int>()/2));
         // TODO: Check if seed arg valid
     }
     else
     {
-        World = new VWorld(10,10,50);
+        World = new VWorld(new VSM_LifeGame);
     }
 
     bool* bSimulate = new bool(true);
@@ -92,7 +93,7 @@ int main(int argc, char *argv[])
     char Command = 0;
 
     // Run World simulation in a separate thread
-    std::thread WorldThread([&World, &bSimulate, &bThreadTaskCompleted](){World->Start(bSimulate, bThreadTaskCompleted);});
+    std::thread WorldThread([&World, &bSimulate, &bThreadTaskCompleted](){World->Run(bSimulate, bThreadTaskCompleted);});
 
     while(*bSimulate)
     {

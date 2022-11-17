@@ -1,9 +1,6 @@
 // Base class for Entities on the Field
-
+#pragma once
 #include <iostream>
-// #include <chrono>
-#include <thread>
-
 
 class VEntity
 {
@@ -25,5 +22,4 @@ public:
     virtual const bool IsDead() {return bDead;}
     virtual bool operator==(const VEntity&);
     virtual ~VEntity();
-
 };

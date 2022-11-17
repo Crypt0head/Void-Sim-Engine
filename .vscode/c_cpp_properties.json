@@ -6,6 +6,7 @@
                 "${workspaceFolder}/**",
                 "/usr/include/boost",
                 "${workspaceFolder}/includes",
+                "${workspaceFolder}/includes/SimMods",
                 "${workspaceFolder}/tests"
             ],
             "defines": [],

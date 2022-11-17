@@ -1,47 +1,31 @@
 //
 // This class should provide and control simmulation
 //
-
+#pragma once
 #include <iostream>
 // #include <chrono>
 #include <vector>
-#include <thread>
-#include <mutex>
 // #include <cstdlib>
 // #include <ctime>
 // #include <iomanip>
 
 class VEntity;
 
+class VSimMod;
+
 class VWorld
 {
 protected:
-    // TODO: VEntityManager needed
-    std::vector<VEntity> EntMgr;
+    // SimMod provides simulation program 
+    VSimMod* CurrentSimMod;
 
-    // Sim's field params hight and width
-    std::pair<int,int> Field;
-
-    bool* bIsSimContinue;
-
-    unsigned long long GenCounter;
-
-    unsigned int Seed;
 
 public:
-    VWorld(unsigned int = 5,unsigned int = 5, unsigned int = 10);
+    VWorld(VSimMod* = nullptr);
     VWorld(std::string cfg_File);
-    void Start(bool* bSimCondition, bool &bThreadTaskCompleted);
-    void Tick();
-    void Stop();
-    void Init();
-    void Update();
-    int Search(int, int);
-    int Search_d(int, int);
-    int CountNighbors(int,int, bool = false);
-    std::pair<int, std::pair<int, int>> CountNighbors(std::pair<int, std::pair<int, int>>);
-    const std::pair<int,int> GetField();
-    std::vector<VEntity>& GetEntMgr();
+    void SetSimMod(VSimMod* sim);
+    VSimMod* GetSimMod();
+    void Run(bool*, bool&);
+    void Break();
     virtual ~VWorld();
-
 };
