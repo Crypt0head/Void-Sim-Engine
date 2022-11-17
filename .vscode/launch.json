@@ -9,7 +9,9 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/bin/main.out",
-            "args": [],
+            "args": [
+                "-f../config/vse-lifegame-config.json"
+            ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],

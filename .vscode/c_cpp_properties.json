@@ -20,7 +20,7 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/include/boost",
+                //"/usr/include/boost",
                 "${workspaceFolder}/includes",
                 "${workspaceFolder}/tests"
             ],

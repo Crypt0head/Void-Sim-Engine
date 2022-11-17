@@ -8,17 +8,19 @@
 #include <thread>
 // #include <chrono>
 // #include <ctime>
-// #include <sstream>
+#include <iostream>
+#include <fstream>
 // #include <iomanip>
-// #include <boost/json.hpp>
 #include <boost/program_options.hpp>
-// #include <boost/...>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 
 #include "../includes/VWorld.h"
 #include "../includes/VEntity.h"
 #include "../includes/SimMods/VSM_LifeGame.h"
 
 namespace opt = boost::program_options;
+namespace ptree = boost::property_tree;
 
 // Simple CL output function
 // TODO: Implament simple SDL rendering engine
@@ -49,7 +51,6 @@ void Print(VWorld &World)
     }
 }
 
-
 int main(int argc, char *argv[])
 {
     VWorld* World = nullptr;
@@ -76,7 +77,42 @@ int main(int argc, char *argv[])
 
     if(vm.count("cfg-file"))
     {
-        // TODO: Implement input from config file
+        const std::string filename = vm["cfg-file"].as<std::string>();
+        ptree::ptree pt;
+        try
+        {
+            ptree::read_json(filename,pt);
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+            return 1;
+        }
+        
+        unsigned int field = 0;
+        unsigned int seed = 0;
+
+        try
+        {
+            field = pt.get<int>("field");
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+            return 1;
+        }
+        
+        try
+        {
+            seed = pt.get<int>("seed");
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+            return 1;
+        }
+
+        World = new VWorld(new VSM_LifeGame(field,field,seed));
     }
     else if(vm.count("field"))
     {
