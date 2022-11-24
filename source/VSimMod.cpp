@@ -1,9 +1,21 @@
 #include "../includes/VEntity.h"
 #include "../includes/VSimMod.h"
 
-VSimMod::VSimMod(){};
+VSimMod::VSimMod(int x, int y): Field(std::make_pair(x,y)){};
 
-void VSimMod::Start(bool *bSimCondition, bool &bThreadTaskCompleted){}
+void VSimMod::Start(bool *bSimCondition, bool &bThreadTaskCompleted){
+    bThreadTaskCompleted = true;
+    bIsSimContinue = bSimCondition;
+
+    while(*bIsSimContinue)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        Update();
+        bThreadTaskCompleted = true;
+    }
+
+    Stop();
+}
 
 void VSimMod::Tick(){}
 

@@ -23,7 +23,8 @@ protected:
     std::pair<int,int> Field;
 
 public:
-    VSimMod();
+    VSimMod() = delete;
+    VSimMod(int x, int w);
     virtual void Init();
     virtual void Start(bool*, bool&);
     virtual void Stop();

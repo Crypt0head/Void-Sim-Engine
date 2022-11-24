@@ -18,6 +18,7 @@
 #include "../includes/VWorld.h"
 #include "../includes/VEntity.h"
 #include "../includes/SimMods/VSM_LifeGame.h"
+#include "../includes/SimMods/VSM_SnakeGame.h"
 
 namespace opt = boost::program_options;
 namespace ptree = boost::property_tree;
@@ -121,7 +122,8 @@ int main(int argc, char *argv[])
     }
     else
     {
-        World = new VWorld(new VSM_LifeGame);
+        // World = new VWorld(new VSM_LifeGame(10,10,50));
+        World = new VWorld(new VSM_SnakeGame(10,10));
     }
 
     bool* bSimulate = new bool(true);

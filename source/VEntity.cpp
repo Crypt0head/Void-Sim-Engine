@@ -23,9 +23,18 @@ void VEntity::Tick()
     }   
 }
 
+void VEntity::Update(){
+    //Nothing here!
+}
+
 const std::pair<const int, const int> VEntity::GetPosition()
 {
     return Position;
+}
+
+void VEntity::SetPosition(int x, int y){
+    Position.first=x;
+    Position.first=y;
 }
 
 bool VEntity::operator==(const VEntity& ent)

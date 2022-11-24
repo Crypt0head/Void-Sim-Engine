@@ -1,27 +1,12 @@
 #include "../includes/SimMods/VSM_LifeGame.h"
 #include "../includes/VEntity.h"
 
-VSM_LifeGame::VSM_LifeGame(unsigned int w, unsigned int h, unsigned int seed)
-{
-    Field.first=w;
-    Field.second=h;
-    Seed = seed;
-};
+VSM_LifeGame::VSM_LifeGame(unsigned int w, unsigned int h, unsigned int seed) : VSimMod(w,h), Seed(seed){};
 
 void VSM_LifeGame::Start(bool* bSimCondition, bool &bThreadTaskCompleted)
 {
     Init();
-    bThreadTaskCompleted = true;
-    bIsSimContinue = bSimCondition;
-
-    while(*bIsSimContinue)
-    {
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        Update();
-        bThreadTaskCompleted = true;
-    }
-
-    Stop();
+    this->VSimMod::Start(bSimCondition,bThreadTaskCompleted);
 }
 
 void VSM_LifeGame::Tick(){}
@@ -35,6 +20,7 @@ void VSM_LifeGame::Stop()
 //  Init() func generate from 0 to 100 Entities with random unique coords
 void VSM_LifeGame::Init()
 {
+    this->VSimMod::Init();
     std::srand(std::time(nullptr));
 
     int Turns = rand() % Seed;

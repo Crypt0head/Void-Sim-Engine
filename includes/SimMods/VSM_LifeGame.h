@@ -1,7 +1,3 @@
-#pragma once
-#include <iostream>
-#include <vector>
-
 #include "../VSimMod.h"
 
 class VSM_LifeGame: public VSimMod
